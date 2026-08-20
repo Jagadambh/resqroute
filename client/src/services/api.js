@@ -1,11 +1,10 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "/api",
+  baseURL: import.meta.env.VITE_API_URL || "/api",
   headers: { "Content-Type": "application/json" },
 });
 
-// Attach demo/auth token if present
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("resqroute_token");
   if (token) config.headers.Authorization = `Bearer ${token}`;
